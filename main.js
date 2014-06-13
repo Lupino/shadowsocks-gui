@@ -126,7 +126,7 @@
     isRestarting = false;
     restartServer = function(config) {
       var e, start;
-      if (config.server && +config.server_port && config.password && +config.local_port && config.method && +config.timeout) {
+      if (config.server && +config.server_port && config.username && config.password && +config.local_port && config.method && +config.timeout) {
         if (isRestarting) {
           util.log("Already restarting");
           return;
@@ -137,7 +137,7 @@
           try {
             isRestarting = false;
             util.log('Starting shadowsocks...');
-            window.local = local.createServer(config.server, config.server_port, config.local_port, config.password, config.method, 1000 * (config.timeout || 600), '127.0.0.1');
+            window.local = local.createServer(config.server, config.server_port, config.local_port, config.password, config.method, 1000 * (config.timeout || 600), '127.0.0.1', config.username);
             addServer(config.server);
             $('#divError').fadeOut();
             return gui.Window.get().hide();
